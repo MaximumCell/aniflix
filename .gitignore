@@ -1,0 +1,38 @@
+# Node modules
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# dotenv files
+.env
+.env.*.local
+
+# Build output
+dist/
+build/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# VS Code settings
+.vscode/
+
+# MongoDB dump files
+dump/
+
+# Coverage reports
+coverage/
+
+# Optional: PM2 logs
+pids/
+*.pid
+*.seed
+
+# Optional: IDE folders
+.idea/
+*.sublime-project
+*.sublime-workspace
