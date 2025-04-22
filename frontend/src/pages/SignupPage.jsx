@@ -1,9 +1,105 @@
-
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useAuthStore } from "../store/authUser";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const SignupPage = () => {
-  return (
-    <div>SignupPage</div>
-  )
-}
+  const { searchParams } = new URL(document.location);
+  const emailValue = searchParams.get("email");
+  const [email, setEmail] = useState(emailValue || "");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
-export default SignupPage
+  const { signup, isSigningup } = useAuthStore();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    signup({ email, username, password });
+  };
+  return (
+    <div className="min-h-screen w-full bg-cover bg-center hero-bg">
+      {/* Navbar */}
+      <header className="fixed top-0 left-0 w-full z-10 backdrop-blur bg-black/50 shadow-md">
+        <div className="max-w-6xl mx-auto flex items-center justify-between p-4">
+          <Link to="/">
+            <img src="/netflix-logo.png" alt="logo" className="w-36 sm:w-52" />
+          </Link>
+        </div>
+      </header>
+
+      {/* Signup Form */}
+      <div className="flex justify-center items-center min-h-screen pt-20 px-4">
+        <div className="w-full max-w-md p-8 space-y-6 bg-black/70 rounded-xl shadow-lg">
+          <h1 className="text-center text-white text-3xl font-bold">Sign Up</h1>
+          <form className="space-y-4" onSubmit={handleSubmit}>
+            <div>
+              <label
+                htmlFor="email"
+                className="text-sm font-medium text-gray-300 block"
+              >
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="you@example.com"
+                className="w-full px-4 py-2 mt-1 border border-gray-700 rounded-md bg-black/40 text-white focus:outline-none focus:ring-2 focus:ring-red-500"
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor="username"
+                className="text-sm font-medium text-gray-300 block"
+              >
+                Username
+              </label>
+              <input
+                type="text"
+                id="username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="noob_dev"
+                className="w-full px-4 py-2 mt-1 border border-gray-700 rounded-md bg-black/40 text-white focus:outline-none focus:ring-2 focus:ring-red-500"
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor="password"
+                className="text-sm font-medium text-gray-300 block"
+              >
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••"
+                className="w-full px-4 py-2 mt-1 border border-gray-700 rounded-md bg-black/40 text-white focus:outline-none focus:ring-2 focus:ring-red-500"
+              />
+            </div>
+
+            <button
+              className="w-full py-2 bg-red-600 text-white font-semibold rounded-md hover:bg-red-700 transition duration-200 flex items-center justify-center"
+              disabled={isSigningup}
+            >
+              {isSigningup ? <LoadingSpinner size="md" /> : "Sign Up"}
+            </button>
+          </form>
+          <p className="text-gray-400 text-center">
+            Already have an account?{" "}
+            <Link to="/login" className="text-red-500 hover:underline">
+              Log In
+            </Link>
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default SignupPage;
