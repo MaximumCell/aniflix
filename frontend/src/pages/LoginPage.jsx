@@ -12,9 +12,12 @@ const LoginPage = () => {
     e.preventDefault();
     login({ email, password });
   };
+  const heroBackgroundStyle = {
+		backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.1)), url('/hero.png')`,
+	};
 
   return (
-    <div className="min-h-screen w-full bg-cover bg-center hero-bg">
+    <div className="min-h-screen w-full bg-cover bg-center" style={heroBackgroundStyle}>
       {/* Navbar */}
       <header className="fixed top-0 left-0 w-full z-10 backdrop-blur bg-black/50 shadow-md">
         <div className="max-w-6xl mx-auto flex items-center justify-between p-4">
