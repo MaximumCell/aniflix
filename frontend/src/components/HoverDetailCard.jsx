@@ -62,7 +62,6 @@ const HoverDetailCard = ({ isVisible, contentType, id, position }) => {
                     if (axios.isCancel(error)) {
                         console.log("Request canceled", error.message);
                     } else {
-                        console.error("Error fetching hover details:", error.response?.data || error.message);
                         setError("Could not load details.");
                         setDetails(null); // Ensure details are null on error
                         setLastFetchedId(null); // Allow refetch attempt if hover again

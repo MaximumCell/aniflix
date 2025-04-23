@@ -24,7 +24,6 @@ const SearchPage = () => {
         e.preventDefault();
         try {
             const res = await axios.get(`/api/v1/search/${activeTab}/${searchTerm}`);
-            console.log("API response:", res.data);
             setResults(res.data.data);
         } catch (error) {
             if(error.response.status === 404) {
