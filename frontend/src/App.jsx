@@ -37,7 +37,7 @@ function App() {
       <Route path="/watch/:id" element={user ? <WatchPage /> : <Navigate to={"/login"} />} />
       <Route path="/search" element={user ? <SearchPage /> : <Navigate to={"/login"} />} />
       <Route path="/history" element={user ? <HistoryPage /> : <Navigate to={"/login"} />} />
-      <Route path="/*" element={<NotFoundPage />} />
+      <Route path="*" element={<NotFoundPage />} />
      </Routes>
      <Footer />
      <Toaster />
