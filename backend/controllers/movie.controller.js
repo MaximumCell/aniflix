@@ -102,8 +102,8 @@ export const getSimilarMovie = async (req, res) => {
 
 export const getMovieByCategory = async (req, res) => {
     try {
-        const { category } = req.params;
-        const data = await getMovieDetails(`https://api.themoviedb.org/3/movie/${category}?language=en-US`);
+        const { categoryName } = req.params;
+        const data = await getMovieDetails(`https://api.themoviedb.org/3/movie/${categoryName}?language=en-US`);
         const results = data?.results;
 
         if (!results || results.length === 0) {
