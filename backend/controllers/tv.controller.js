@@ -103,8 +103,8 @@ export const getSimilarTv = async (req, res) => {
 
 export const getTvByCategory = async (req, res) => {
     try {
-        const { category } = req.params;
-        const data = await getMovieDetails(`https://api.themoviedb.org/3/tv/${category}?language=en-US&page=1`);
+        const { categoryName } = req.params;
+        const data = await getMovieDetails(`https://api.themoviedb.org/3/tv/${categoryName}?language=en-US&page=1`);
         const results = data?.results;
 
         if (!results || results.length === 0) {
