@@ -23,10 +23,11 @@ app.use("/api/v1/tv", protectRoute, tvRouter);
 app.use("/api/v1/search", protectRoute, searchRouter);
 
 if (ENV_VARS.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "/frontend/dist")));
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
-  });
+	app.use(express.static(path.join(__dirname, "/frontend/dist")));
+
+	app.get("*", (req, res) => {
+		res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
+	});
 }
 
 app.listen(PORT, () => {
