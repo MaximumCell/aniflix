@@ -23,11 +23,20 @@ app.use("/api/v1/tv", protectRoute, tvRouter);
 app.use("/api/v1/search", protectRoute, searchRouter);
 
 if (ENV_VARS.NODE_ENV === "production") {
-	app.use(express.static(path.join(__dirname, "/frontend/dist")));
+  const staticPath = path.join(__dirname, "/frontend/dist");
+  console.log("Serving static files from:", staticPath);
+  app.use(express.static(staticPath));
 
-	app.get("*", (req, res) => {
-		res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
-	});
+  // Change the fallback route to use a regex pattern
+  const fallbackPattern = /^(.*)$/; // This regex matches any path
+  console.log("Registering fallback route with pattern:", fallbackPattern);
+  app.get(fallbackPattern, (req, res) => {
+    const indexPath = path.resolve(__dirname, "frontend", "dist", "index.html");
+    console.log("Sending index.html from:", indexPath);
+    res.sendFile(indexPath);
+  });
+
+  console.log("Production static and fallback routes registered.");
 }
 
 app.listen(PORT, () => {
