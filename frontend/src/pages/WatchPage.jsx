@@ -265,7 +265,7 @@ const WatchPage = () => {
           />
         </div>
 
-        {similarContent.length > 0 && (
+        {similarContent?.length > 0 && (
           <div className="mt-12 max-w-5xl mx-auto relative">
             <h3 className="text-3xl font-bold mb-4">Similar Movies/Tv Show</h3>
 
