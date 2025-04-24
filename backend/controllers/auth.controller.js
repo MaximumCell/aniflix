@@ -36,7 +36,7 @@ export const signup = async  (req, res) => {
         if (newUser) {
             generateTokenAndCookie(newUser._id, res);
             await newUser.save();
-            return res.status(201).json({ success: true,message: "User created successfully" });
+            return res.status(201).json({ success: true,message: "User created successfully",user: newUser });
         }else {
             res.status(500).json({ success: false, message: "Invalid User data"})
         }

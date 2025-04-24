@@ -92,7 +92,7 @@ const HomeScreen = () => {
             </Link>
 
             <Link
-              to={`/content/${trendingContent?.id}`}
+              to={`/watch/${trendingContent?.id}`}
               className="bg-gray-500/70 hover:bg-gray-500 text-white py-2 px-4 rounded-md flex items-center"
             >
               <Info className="size-6 mr-2" />

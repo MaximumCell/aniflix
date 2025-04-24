@@ -94,6 +94,17 @@ const WatchPage = () => {
     getContentDetails();
   }, [contentType, id]);
 
+  useEffect(() => {
+    const hideOnScroll = () => {
+      clearTimeout(hoverTimeoutRef.current);
+      setIsCardVisible(false);
+      setHoveredItemId(null);
+    };
+  
+    window.addEventListener("scroll", hideOnScroll, { passive: true });
+    return () => window.removeEventListener("scroll", hideOnScroll);
+  }, []);
+
   if (!content && !isLoading) {
     return (
       <div className="bg-black text-white h-screen">
@@ -124,7 +135,7 @@ const WatchPage = () => {
       
       // Calculate initial position
       const initialX = rect.left;
-      const initialY = rect.top - 10; // Position slightly above the element
+      const initialY = rect.bottom+1100; // Position slightly above the element
       
       // Get viewport dimensions
       const viewportWidth = window.innerWidth;
@@ -148,12 +159,10 @@ const WatchPage = () => {
       //     adjustedY = viewportHeight - estimatedCardHeight - 10; // 10px margin from edge
       // }
       // Check if there's enough space above
-      const showBelow = initialY - estimatedCardHeight < 0;
       
       setCardPosition({
           x: adjustedX,
-          y: initialY+150,
-          showBelow: showBelow // Add this flag to indicate if card should show below
+          y: initialY,
       });
       
       setHoveredItemId(item.id);
@@ -172,6 +181,7 @@ const WatchPage = () => {
 
   return (
     <div className="bg-black min-h-screen text-white">
+      
       <div className="mx-auto container px-4 py-8 h-full">
         <Navbar />
 

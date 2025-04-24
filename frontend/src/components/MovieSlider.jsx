@@ -51,36 +51,28 @@ const MovieSlider = ({category}) => {
         
         // Calculate initial position
         const initialX = rect.left;
-        const initialY = rect.top - 10; // Position slightly above the element
+        const initialY = rect.top;
         
         // Get viewport dimensions
         const viewportWidth = window.innerWidth;
-        const viewportHeight = window.innerHeight;
         const cardWidth = 280; // Width of the card
-        const estimatedCardHeight = 200; // Estimated height of the card (adjust as needed)
         
         // Adjust x-position to keep card within viewport horizontally
         let adjustedX = initialX;
         
         // If card would overflow right edge of viewport
         if (initialX + cardWidth > viewportWidth) {
-            adjustedX = viewportWidth - cardWidth - 10; // 10px margin from edge
+            adjustedX = viewportWidth - cardWidth - 10; 
         }
         
         // If card would overflow left edge of viewport
         if (initialX < 0) {
-            adjustedX = 10; // 10px margin from edge
+            adjustedX = 10; 
         }
-        // if (initialY + estimatedCardHeight > viewportHeight) {
-        //     adjustedY = viewportHeight - estimatedCardHeight - 10; // 10px margin from edge
-        // }
-        // Check if there's enough space above
-        const showBelow = initialY - estimatedCardHeight < 0;
         
         setCardPosition({
             x: adjustedX,
             y: initialY,
-            showBelow: showBelow // Add this flag to indicate if card should show below
         });
         
         setHoveredItemId(item.id);
@@ -89,13 +81,21 @@ const MovieSlider = ({category}) => {
     
 
     const handleMouseLeave = () => {
-        // Set a delay before hiding the card
         hoverTimeoutRef.current = setTimeout(() => {
             setIsCardVisible(false);
-            // Optional: Reset hoveredItemId after hide animation finishes if needed
-            // setHoveredItemId(null);
-        }, 200); // 200ms delay
+        }, 200);
     };
+
+    useEffect(() => {
+        const hideOnScroll = () => {
+          clearTimeout(hoverTimeoutRef.current);
+          setIsCardVisible(false);
+          setHoveredItemId(null);
+        };
+      
+        window.addEventListener("scroll", hideOnScroll, { passive: true });
+        return () => window.removeEventListener("scroll", hideOnScroll);
+      }, []);
   return (
     <div className="bg-black text-white relative px-5 md:px-20" onMouseEnter={() => setShowArrows(true)} onMouseLeave={() => setShowArrows(false)}>
         <h2 className="text-2xl font-bold mt-10 mb-5">

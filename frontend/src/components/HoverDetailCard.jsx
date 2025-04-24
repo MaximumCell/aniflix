@@ -94,15 +94,12 @@ const HoverDetailCard = ({ isVisible, contentType, id, position }) => {
 
     // Basic positioning - adjust as needed based on how you calculate 'position'
     const style = {
-    position: 'fixed',
+    position: 'absolute',
     top: position?.y || 0,
     left: position?.x || 0,
-    transform: position?.showBelow 
-        ? 'translateY(0)' // Don't translate up if showing below
-        : 'translateY(-100%)', // Otherwise show above
     zIndex: 999,
     width: '280px',
-    pointerEvents: 'auto',
+    pointerEvents: 'none',
 };
 
     // Determine title and date based on content type (using optional chaining)
