@@ -2,10 +2,11 @@ import { Link } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import { Info, Play } from "lucide-react";
 import useContent from "../../hooks/useContent";
-import { MOVIE_CATEGORIES, ORIGINAL_IMG_BASE_URL, TV_CATEGORIES } from "../../utils/constants";
+import { ANIME_CATEGORIES, MOVIE_CATEGORIES, ORIGINAL_IMG_BASE_URL, TV_CATEGORIES } from "../../utils/constants";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import { useContentStore } from "../../store/content";
 import MovieSlider from "../../components/MovieSlider";
+import AnimeSlider from "../../components/AnimeSlider";
 import { useState } from "react";
 
 const HomeScreen = () => {
@@ -103,8 +104,21 @@ const HomeScreen = () => {
       </div>
 
       <div className="flex flex-col gap-10 bg-black py-10">
-                {contentType === "movie" ? (MOVIE_CATEGORIES.map((category) => <MovieSlider key={category} category={category}/>)) : (TV_CATEGORIES.map((category) => <MovieSlider key={category} category={category}/>))}
-      </div>
+      {contentType === "movie" &&
+          MOVIE_CATEGORIES.map((category) => (
+            <MovieSlider key={category} category={category} contentType="movie" />
+          ))}
+
+        {contentType === "tv" &&
+          TV_CATEGORIES.map((category) => (
+            <MovieSlider key={category} category={category} contentType="tv" />
+          ))}
+
+        {contentType === "anime" && // <-- This is the missing part in your provided code
+          ANIME_CATEGORIES.map((category) => (
+            // Use AnimeSlider for anime categories
+            <AnimeSlider key={category} category={category} /> // AnimeSlider doesn't need contentType prop per its design
+          ))}</div>
     </>
   );
 };

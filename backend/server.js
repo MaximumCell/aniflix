@@ -1,6 +1,7 @@
 import express from "express";
 import authRouter from "./routes/auth.route.js";
 import movieRouter from "./routes/movie.route.js";
+import animeRouter from "./routes/anime.route.js";
 import tvRouter from "./routes/tv.route.js";
 import searchRouter from "./routes/search.route.js";
 import { ENV_VARS } from "./config/envVars.js";
@@ -19,6 +20,7 @@ app.use(cookieParser());
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/movie", protectRoute, movieRouter);
+app.use("/api/v1/anime", protectRoute, animeRouter);
 app.use("/api/v1/tv", protectRoute, tvRouter);
 app.use("/api/v1/search", protectRoute, searchRouter);
 

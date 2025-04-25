@@ -7,6 +7,8 @@ import {
   Film,
   Tv,
   Clock,
+  Activity,
+  Users,
 } from "lucide-react";
 import { useAuthStore } from "../store/authUser";
 import { useContentStore } from "../store/content";
@@ -43,6 +45,15 @@ const Navbar = () => {
           >
             <Tv className="w-4 h-4" />
             TV Shows
+          </Link>
+          
+          <Link
+            to='/anime'
+            onClick={() => setContentType("anime")}
+            className='flex items-center gap-1 hover:underline'
+          >
+            <Users className="w-4 h-4" />
+            Anime
           </Link>
           <Link
             to='/history'
