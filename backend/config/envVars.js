@@ -1,6 +1,8 @@
 import dotenv from "dotenv";
 
-dotenv.config();
+if (process.env.NODE_ENV !== 'production') {
+    dotenv.config(); // Only loads .env file in development/testing
+}
 
 export const ENV_VARS = {
     PORT: process.env.PORT || 5000,
