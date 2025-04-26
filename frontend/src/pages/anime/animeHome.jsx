@@ -49,7 +49,6 @@ const AnimeHome = () => {
       <div className="h-screen text-white relative">
         <Navbar />
         <div className="absolute top-0 left-0 w-full h-full bg-black/70 flex items-center justify-center -z-10 shimmer">
-          <LoadingSpinner size="lg" />
         </div>
       </div>
     );
@@ -97,7 +96,6 @@ const AnimeHome = () => {
         {/* Only show image loading if we have a valid image URL to load */}
         {imgLoading && imageUrl && (
           <div className="absolute top-0 left-0 w-full h-full bg-black/70 flex items-center justify-center -z-10 shimmer">
-            <LoadingSpinner size="lg" />
           </div>
         )}
 

@@ -123,6 +123,14 @@ const Navbar = () => {
             TV Shows
           </Link>
           <Link
+            to='/anime'
+            onClick={() => setContentType("anime")}
+            className='flex items-center gap-2 hover:text-red-500'
+          >
+            <Users className="w-4 h-4" />
+            Anime
+          </Link>
+          <Link
             to='/history'
             onClick={toggleMobileMenu}
             className='flex items-center gap-2 hover:text-red-500'
